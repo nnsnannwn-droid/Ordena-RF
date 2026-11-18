@@ -161,3 +161,7 @@ body.leaving #v{opacity:0;transform:translateY(10px);transition:opacity .17s eas
 @keyframes ordenaMark{from{height:0;opacity:0}to{height:28px;opacity:1}}
 @media(max-width:899px){.bot{backdrop-filter:blur(16px);background:color-mix(in srgb,var(--card) 91%,transparent)}}
 @media(prefers-reduced-motion:reduce){.page{animation:none}body.leaving #v{transition:none}}
+@media(min-width:900px){
+ #grab{left:18px;bottom:50%;transform:translateY(50%);width:7px;height:68px;border-radius:0 8px 8px 0;animation:none}
+ #hz{left:0;right:auto;top:0;bottom:0;width:10px;height:auto}
+}
