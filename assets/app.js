@@ -72,11 +72,11 @@ const M=(o,c="")=>{const{t,a,b}=o;const s={star:`<polygon points="50,2 60,30 90,
 const ico={home:"🏠",catalog:"📖",history:"📜",files:"📁",ai:"🤖"},nm={home:"Главная",catalog:"Каталог",history:"История",files:"Файлы",ai:"ИИ"};
 const UI={q:"",f:"Все",fqr:"",open:{b:true},sy:{},from:ls("mo_from","catalog"),restore:false};let lastR=null;
 const PAGE={home:"index.html",catalog:"catalog.html",history:"history.html",files:"files.html",ai:"assistant.html",auth:"account.html",me:"profile.html"};
-function go(r){localStorage.setItem("mo_from",route());if(r.startsWith("order-")){location.href="order.html?id="+encodeURIComponent(r.slice(6));return}location.href=PAGE[r]||"index.html"}
+function go(r){localStorage.setItem("mo_from",route());const target=r.startsWith("order-")?"order.html?id="+encodeURIComponent(r.slice(6)):(PAGE[r]||"index.html");document.body.classList.add("leaving");setTimeout(()=>{location.href=target},170)}
 const goBack=()=>{UI.restore=true;go(UI.from||ls("mo_from","catalog"))};
 const route=()=>document.body.dataset.page==="order"?"order-"+(new URLSearchParams(location.search).get("id")||""):(document.body.dataset.page||"home");
 function applyST(){document.body.classList.toggle("noanim",!ST.anim);document.body.classList.toggle("big",!!ST.big);document.body.classList.toggle("navfix",!!ST.nav);if(ST.nav)$("#nav").classList.remove("hide");document.documentElement.dataset.theme=ST.dark?"dark":"light";document.body.classList.toggle("noglow",!ST.glow);document.documentElement.dataset.acc=ST.acc||"gold";sv("mo_set",ST)}
-function chrome(){const r=route();$("#nav").innerHTML=Object.keys(ico).map(k=>`<button class="${r===k?"on":""}" onclick="go('${k}')"><span>${ico[k]}</span>${nm[k]}</button>`).join("");
+function chrome(){const r=route();$("#nav").innerHTML=Object.keys(ico).map(k=>`<button class="${r===k?"on":""}" aria-current="${r===k?"page":"false"}" onclick="go(\'${k}\')"><span>${ico[k]}</span>${nm[k]}</button>`).join("");
 const me=U.find(u=>u.e===cur);$("#acc").innerHTML=me?`<button class="av" id="avb" aria-label="Меню аккаунта">${me.av==="i"?me.n[0].toUpperCase():me.av}</button>`:`<button class="pill" id="avb">Войти</button>`;
 $("#avb").onclick=e=>{e.stopPropagation();if(!me)return go("auth");$("#menu").innerHTML=`<button onclick="settings()">⚙️ Настройки</button><button onclick="go('me')">Личная страница</button><button onclick="out()">Выйти</button>`;$("#menu").classList.toggle("on")}}
 document.addEventListener("click",()=>$("#menu").classList.remove("on"));
