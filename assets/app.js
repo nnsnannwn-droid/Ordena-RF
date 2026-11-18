@@ -268,6 +268,6 @@ document.addEventListener("pointermove",e=>{const c=e.target.closest&&e.target.c
 if(ST.tilt)document.querySelectorAll(".tilt").forEach(s=>{const r=s.getBoundingClientRect(),k=v=>Math.max(-1,Math.min(1,v)),dx=k((e.clientX-r.left-r.width/2)/(innerWidth/2)),dy=k((e.clientY-r.top-r.height/2)/(innerHeight/2));s.style.transform=`perspective(500px) rotateY(${dx*40}deg) rotateX(${-dy*40}deg) scale(1.08)`})});
 addEventListener("keydown",e=>{if(e.key==="Tab")document.body.classList.add("kb")});addEventListener("pointerdown",()=>document.body.classList.remove("kb"));
 applyST();render();
-(function(){const sp=$("#sp");if(document.body.dataset.page!=="home"||!ST.anim||!ST.splash||matchMedia("(prefers-reduced-motion:reduce)").matches){sp.remove();return}
+(function(){const sp=$("#sp");const seen=sessionStorage.getItem("mo_splash_seen")==="1";if(document.body.dataset.page!=="home"||seen||!ST.anim||!ST.splash||matchMedia("(prefers-reduced-motion:reduce)").matches){sp.remove();return}sessionStorage.setItem("mo_splash_seen","1");
 $("#stars").innerHTML=Array.from({length:40},()=>`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s"></i>`).join("");
 const end=()=>{sp.classList.add("out");setTimeout(()=>sp.remove(),900)};sp.onclick=end;setTimeout(end,3900)})();
