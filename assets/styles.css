@@ -142,3 +142,22 @@ body.kb *:focus-visible{outline:3px solid var(--gold)!important;outline-offset:2
 .sr:focus,.inp input:focus,.form input:focus{border-color:var(--gold)}
 .noanim *,.noanim *::before,.noanim *::after{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Ordena RF — адаптивная навигация и мягкие переходы между страницами */
+.page{animation:ordenaEnter .48s cubic-bezier(.2,.75,.25,1) both}
+@keyframes ordenaEnter{from{opacity:0;transform:translateY(14px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
+body.leaving #v{opacity:0;transform:translateY(10px);transition:opacity .17s ease,transform .17s ease}
+.bot button{position:relative;min-width:0}
+.bot button.on{box-shadow:0 5px 16px rgba(166,124,26,.22)}
+.bot button:focus-visible{outline:3px solid var(--gold)!important;outline-offset:3px}
+@media(min-width:900px){
+ .bot{left:18px;top:50%;bottom:auto;transform:translateY(-50%);flex-direction:column;gap:5px;width:82px;max-width:none;padding:9px;border-radius:23px}
+ .bot button{width:100%;min-height:62px;padding:8px 4px;font-size:10px}
+ .bot button span{font-size:22px}
+ .bot button.on::before{content:"";position:absolute;left:-9px;top:50%;width:4px;height:28px;border-radius:0 5px 5px 0;background:var(--gold);transform:translateY(-50%);animation:ordenaMark .28s ease both}
+ .bot.hide{transform:translateY(-50%) translateX(-125%)}
+ main{padding-left:112px}
+}
+@keyframes ordenaMark{from{height:0;opacity:0}to{height:28px;opacity:1}}
+@media(max-width:899px){.bot{backdrop-filter:blur(16px);background:color-mix(in srgb,var(--card) 91%,transparent)}}
+@media(prefers-reduced-motion:reduce){.page{animation:none}body.leaving #v{transition:none}}
