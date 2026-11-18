@@ -202,3 +202,10 @@ html{scroll-behavior:smooth}
  .bot.page-nav button span{width:auto;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Ensure the mobile drawer's open state wins over the legacy hide transform. */
+@media(max-width:899px){
+ .bot.page-nav.mobile-open,
+ .bot.mobile-open.hide{transform:translate(0,-50%) !important;visibility:visible;pointer-events:auto}
+ #mobileNavToggle{pointer-events:auto;touch-action:manipulation}
+}
